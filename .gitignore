@@ -1,0 +1,8 @@
+sendgrid.env 
+.flaskenv
+migrations
+logs
+safanenv
+__pycache__
+config.py
+app.db
