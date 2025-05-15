@@ -12,7 +12,8 @@ from config import Config
 
 
 def get_locale():
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    # return request.accept_languages.best_match(app.config['LANGUAGES'])
+    return 'ur_PK' # force spanish
 
 
 app = Flask(__name__)

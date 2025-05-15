@@ -2,7 +2,7 @@ sendgrid.env
 .flaskenv
 migrations
 logs
-safanenv
+safanvenv
 __pycache__
 config.py
 app.db
