@@ -43,6 +43,12 @@ def create_app(config_class=Config):
     from app.auth import bp as auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
+    from app.cli import bp as cli_bp
+    app.register_blueprint(cli_bp)
+
+    from app.main import bp as main_bp
+    app.register_blueprint(main_bp)
+
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:
             auth = None
@@ -71,5 +77,6 @@ def create_app(config_class=Config):
         app.logger.setLevel(logging.INFO)
         app.logger.info('Microblog startup')
 
+    return app
 
 from app import models
