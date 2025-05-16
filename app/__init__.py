@@ -12,8 +12,8 @@ from config import Config
 
 
 def get_locale():
-    # return request.accept_languages.best_match(app.config['LANGUAGES'])
-    return 'ur_PK' # force spanish
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    # return 'ur_PK' # force spanish
 
 
 app = Flask(__name__)
@@ -26,6 +26,9 @@ login.login_message = _l('Please log in to access this page.')
 mail = Mail(app)
 moment = Moment(app)
 babel = Babel(app, locale_selector=get_locale)
+
+from app.errors import bp as errors_bp
+app.register_blueprint(errors_bp)
 
 if not app.debug:
     if app.config['MAIL_SERVER']:
@@ -56,4 +59,4 @@ if not app.debug:
     app.logger.info('Microblog startup')
 
 
-from app import routes, models, errors
+from app import routes, models
