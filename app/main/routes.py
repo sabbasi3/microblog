@@ -11,6 +11,8 @@ from app.models import User, Post
 from app.translate import translate
 from app.main import bp
 from app.main.forms import SearchForm
+from flask import send_from_directory, current_app
+import os
 
 @bp.before_app_request
 def before_request():
@@ -166,3 +168,12 @@ def search():
         if page > 1 else None
     return render_template('search.html', title=_('Search'), posts=posts,
                            next_url=next_url, prev_url=prev_url)
+
+
+@bp.route('/favicon.ico')
+def favicon():
+    return send_from_directory(
+        os.path.join(current_app.root_path, 'static'),
+        'favicon.ico',
+        mimetype='image/vnd.microsoft.icon'
+    )
