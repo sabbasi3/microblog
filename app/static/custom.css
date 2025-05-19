@@ -6,5 +6,7 @@ body {
     }
     
 th {
-    text-align: match-parent !important;
+    text-align: -webkit-match-parent; /* For Chrome, Edge, etc. */
+    text-align: match-parent; /* For Safari 15.4+ */
+
     }
