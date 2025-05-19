@@ -4,6 +4,5 @@ migrations
 logs
 safanvenv
 __pycache__
-config.py
 app.db
 .env
