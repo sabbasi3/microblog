@@ -1,9 +1,11 @@
 
 /* custom.css */
+
+/* Fix for text-size-adjust */
 body {
-        -webkit-text-size-adjust: 100%;
-        text-size-adjust: 100%;
-    }
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
     
 th {
     text-align: -webkit-match-parent; /* For Chrome, Edge, etc. */
