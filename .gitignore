@@ -6,3 +6,4 @@ safanvenv
 __pycache__
 app.db
 .env
+Dockerfile_art

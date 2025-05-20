@@ -11,3 +11,6 @@ exec gunicorn -b :5000 --access-logfile - --error-logfile - microblog:app
 
 # This script is used to run the Flask application with Gunicorn. on docker image
 # add reties in case database is not ready to accept connections
+
+# Convert line endings: On your host (Windows), run:
+# dos2unix boot.sh
