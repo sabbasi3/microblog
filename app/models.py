@@ -25,7 +25,7 @@ def load_user(id):
     return db.session.get(User, int(id))
 
 class User(UserMixin, db.Model):
-    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    id: so.Mapped[int] = so.mapped_column(sa.Integer, primary_key=True, autoincrement=True)
     username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True,
                                                 unique=True)
     email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True,
@@ -157,7 +157,7 @@ db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
 db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
 
 class Post(SearchableMixin, db.Model):
-    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    id: so.Mapped[int] = so.mapped_column(sa.Integer, primary_key=True, autoincrement=True)
     body: so.Mapped[str] = so.mapped_column(sa.String(140))
     timestamp: so.Mapped[datetime] = so.mapped_column(
         index=True, default=lambda: datetime.now(timezone.utc))
