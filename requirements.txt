@@ -1,5 +1,6 @@
 aiosmtpd==1.4.6
 alembic==1.15.2
+async-timeout==5.0.1
 atpublic==5.1
 attrs==25.3.0
 babel==2.17.0
@@ -35,7 +36,9 @@ python-dateutil==2.9.0.post0
 python-dotenv==1.1.0
 python-http-client==3.3.7
 pytz==2025.2
+redis==6.1.0
 requests==2.32.3
+rq==2.3.3
 six==1.17.0
 SQLAlchemy==2.0.40
 thread==2.0.5
