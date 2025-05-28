@@ -1,3 +1,10 @@
+import os
+from dotenv import load_dotenv
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, '..', '.env'))
+print("DATABASE_URL:", os.environ.get('DATABASE_URL'))
+
 import json
 import sys
 import time
