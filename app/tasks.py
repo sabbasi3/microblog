@@ -1,20 +1,17 @@
-from app import create_app
+import json
 import sys
 import time
-from app.models import User, Post
-import json
+import sqlalchemy as sa
 from flask import render_template
+from rq import get_current_job
+from app import create_app, db
+from app.models import User, Post, Task
 from app.email import send_email
 
 app = create_app()
 app.app_context().push()
 
-
 import time
-from rq import get_current_job
-from app import db
-from app.models import Task
-
 def example(seconds):
     job = get_current_job()
     print('Starting task')
