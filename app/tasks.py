@@ -72,4 +72,11 @@ def export_posts(user_id):
         app.logger.error('Unhandled exception', exc_info=sys.exc_info())
     finally:
         # handle clean up
+        # Always mark the task as complete
+        job = get_current_job()
+        if job:
+            task = db.session.get(Task, job.get_id())
+            if task:
+                task.complete = True
+                db.session.commit()
         _set_task_progress(100)

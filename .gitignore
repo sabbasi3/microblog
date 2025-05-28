@@ -7,3 +7,4 @@ __pycache__
 app.db
 .env
 Dockerfile_art
+safanvenv_wsl
