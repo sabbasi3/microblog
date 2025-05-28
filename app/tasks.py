@@ -32,6 +32,8 @@ def example(seconds):
     print('Task completed')
 
 
+
+
 def _set_task_progress(progress):
     job = get_current_job()
     if job:
@@ -44,10 +46,9 @@ def _set_task_progress(progress):
             task.complete = True
         db.session.commit()
 
+
 def export_posts(user_id):
     try:
-        # read user posts from database
-        # send email with data to user
         user = db.session.get(User, user_id)
         _set_task_progress(0)
         data = []
@@ -61,7 +62,7 @@ def export_posts(user_id):
             time.sleep(5)
             i += 1
             _set_task_progress(100 * i // total_posts)
-        
+
         send_email(
             '[Microblog] Your blog posts',
             sender=app.config['ADMINS'][0], recipients=[user.email],
@@ -71,16 +72,7 @@ def export_posts(user_id):
                           json.dumps({'posts': data}, indent=4))],
             sync=True)
     except Exception:
-        # handle unexpected errors
         _set_task_progress(100)
         app.logger.error('Unhandled exception', exc_info=sys.exc_info())
     finally:
-        # handle clean up
-        # Always mark the task as complete
-        job = get_current_job()
-        if job:
-            task = db.session.get(Task, job.get_id())
-            if task:
-                task.complete = True
-                db.session.commit()
         _set_task_progress(100)
