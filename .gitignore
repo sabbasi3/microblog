@@ -1,10 +1,9 @@
 sendgrid.env 
 .flaskenv
-migrations
 logs
 safanvenv
 __pycache__
-app.db
 .env
 Dockerfile_art
 safanvenv_wsl
+venv
