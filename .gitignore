@@ -7,3 +7,4 @@ __pycache__
 Dockerfile_art
 safanvenv_wsl
 venv
+app.db
