@@ -8,3 +8,5 @@ COPY app app
 COPY migrations migrations
 COPY microblog.py config.py boot.sh ./
 RUN chmod a+x boot.sh
+
+ENTRYPOINT ["./boot.sh"]
