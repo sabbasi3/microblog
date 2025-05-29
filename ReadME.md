@@ -179,6 +179,22 @@ flask run
 
 ---
 
+### 11. Deploy the application
+
+There are several ways to deploy the Flask app, depending on needs and resources:
+
+1. **Self-host on a home server:**  
+    Run the app on your own hardware and expost it to the inernet using port forwarding or a secure tunneling service like Cloudflare Tunnel. This gives you full control and is suitable for production if you secure your server properly.
+2. **Cloud platforms (Fly.io, Render):**  
+    Use Fly.io or Render (but no ElasticSearch)
+    Both Fly.io and Render offer easy deployment for Flask apps with free tiers. Note that managed Elasticsearch is not available on these free plans, but they are great for most other features and background tasks.
+3. **Run on Docker Containers:**
+   Package your app and its dependencies using Docker. You can then deploy it to any cloud provider, VPS, or even your local machine. This approach is portable and production-friendly.
+4. **Heroku:**  
+    Heroku is beginner-friendly and supports Flask out of the box. However, background workers or add-ons may costs more.
+
+> **Tip:** For production deployments, always use HTTPS, configure environment variables securely, and consider using a managed database and Redis service.
+
 ## Testing
 
 Run the unit tests with:
