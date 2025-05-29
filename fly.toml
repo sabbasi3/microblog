@@ -1,5 +1,5 @@
 app = "microblog-bde2-a"
-primary_region = "dfw"
+primary_region = "ord"
 
 [http_service]
 auto_start_machines = true
