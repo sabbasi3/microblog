@@ -58,6 +58,19 @@ Check it out at: https://blog.safanabbasi.com
 └── requirements.txt    # Python dependencies
 ```
 
+### About Blueprints
+
+A **Flask blueprint** is a way to organize a group of related routes, templates, and static files.  
+Blueprints make it easier to structure large applications by splitting functionality into reusable, modular components (such as authentication, API, error handling, etc.).  
+Each blueprint can be developed independently and then registered with the main application.
+
+In this project, you’ll find blueprints for:
+- `main/` – main site routes
+- `auth/` – authentication (login, register, etc.)
+- `api/` – REST API endpoints
+- `errors/` – custom error pages
+
+For more details, see the [Flask documentation on blueprints](https://flask.palletsprojects.com/en/latest/blueprints/).
 ---
 
 ## Setup
