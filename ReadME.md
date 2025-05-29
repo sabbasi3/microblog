@@ -2,7 +2,9 @@
 
 A multilingual, full-featured microblogging web application built with Flask, SQLAlchemy, HTML, JavaScript, and Elasticsearch.
 
-Check it out at here -> https://blog.safanabbasi.com 
+Check it out at: https://blog.safanabbasi.com
+
+---
 
 ## Features
 
@@ -13,13 +15,20 @@ Check it out at here -> https://blog.safanabbasi.com
 - Multilingual support (English, Spanish, Urdu)
 - Post translation using Microsoft Translator API
 - Responsive Bootstrap 5 UI
-- Error logging and email notifications for admins
+- Background task processing with Redis and RQ
+- Email notifications for admins and users
+- Error logging and reporting
+- REST API endpoints
+- Docker support for deployment
+
+---
 
 ## Project Structure
 
 ```
 .
 ├── app/
+│   ├── api/            # REST API blueprint
 │   ├── auth/           # Authentication blueprint
 │   ├── errors/         # Error handlers blueprint
 │   ├── main/           # Main application blueprint
@@ -31,64 +40,131 @@ Check it out at here -> https://blog.safanabbasi.com
 │   ├── email.py        # Email sending utilities
 │   ├── models.py       # SQLAlchemy models
 │   ├── search.py       # Elasticsearch integration
+│   ├── tasks.py        # Background task definitions
 │   └── translate.py    # Microsoft Translator integration
 ├── config.py           # Configuration
 ├── microblog.py        # App entry point
 ├── reindex_posts.py    # Script to reindex posts in Elasticsearch
 ├── send_email.py       # Script to send a test email
 ├── tests.py            # Unit tests
+├── .env                # Environment variables
 ├── .flaskenv           # Flask environment variables
 ├── .gitignore
 ├── app.db              # SQLite database
 ├── logs/               # Log files
 ├── migrations/         # Database migrations
-└── safanvenv/          # Virtual environment
+├── safanvenv/          # Virtual environment (Windows)
+├── safanvenv_wsl/      # Virtual environment (WSL/Linux)
+└── requirements.txt    # Python dependencies
 ```
+
+---
 
 ## Setup
 
-1. **Clone the repository and create a virtual environment:**
+### 1. Clone the repository
 
-    ```sh
-    git clone <your-repo-url>
-    cd microblog
-    python -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
-    ```
+```sh
+git clone <your-repo-url>
+cd microblog
+```
 
-2. **Install dependencies:**
+### 2. Create a virtual environment
 
-    ```sh
-    pip install -r requirements.txt
-    ```
+#### **On Linux/macOS (recommended):**
+```sh
+python3 -m venv venv
+source venv/bin/activate
+```
 
-3. **Set environment variables:**
+#### **On Windows (Command Prompt):**
+```sh
+python -m venv venv
+venv\Scripts\activate
+```
 
-    Create a `.env` file or set variables in your shell for:
+#### **On WSL2:**
+```sh
+python3 -m venv venv
+source venv/bin/activate
+```
 
-    - `SECRET_KEY`
-    - `MAIL_SERVER`, `MAIL_PORT`, `MAIL_USE_TLS`, `MAIL_USERNAME`, `MAIL_PASSWORD`
-    - `ADMINS` (comma-separated emails)
-    - `ELASTICSEARCH_URL` (e.g., `http://localhost:9200`)
-    - `MS_TRANSLATOR_KEY` (Microsoft Translator API key)
+### 3. Install dependencies
 
-4. **Initialize the database:**
+```sh
+pip install -r requirements.txt
+```
 
-    ```sh
-    flask db upgrade
-    ```
+### 4. Set environment variables
 
-5. **(Optional) Reindex existing posts for search:**
+Create a `.env` file in the project root with the following content (edit values as needed):
 
-    ```sh
-    python reindex_posts.py
-    ```
+```
+SECRET_KEY=your-secret-key
+MAIL_SERVER=smtp.sendgrid.net
+MAIL_PORT=587
+MAIL_USE_TLS=True
+MAIL_USERNAME=apikey
+MAIL_PASSWORD=your-sendgrid-api-key
+MAIL_DEFAULT_SENDER=contact@yourdomain.com
+ADMINS=your-email@example.com
+POSTS_PER_PAGE=5
+LANGUAGES=en,es,ur_PK
+MS_TRANSLATOR_KEY=your-microsoft-translator-key
+ELASTICSEARCH_URL=http://localhost:9200
+DATABASE_URL=sqlite:///absolute/path/to/app.db
+REDIS_URL=redis://
+```
 
-6. **Run the application:**
+> **Tip:** For SQLite, use an absolute path for `DATABASE_URL` that matches your OS (e.g., `sqlite:////home/username/microblog/app.db` on Linux/WSL2).
 
-    ```sh
-    flask run
-    ```
+### 5. Initialize the database
+
+```sh
+flask init  # Only needed the first time to set up migrations
+flask db migrate -m "Initial migration"
+flask db upgrade
+```
+
+### 6. Update the database after model changes
+
+Whenever you make changes to your models (add, remove, or modify fields), run:
+
+```sh
+flask db migrate -m "Describe your change"
+flask db upgrade
+```
+
+This will generate a new migration script and apply it to your database.
+
+---
+
+### 7. (Optional) Reindex existing posts for search
+
+```sh
+python reindex_posts.py
+```
+
+### 8. Run Redis server (for background tasks)
+
+```sh
+redis-server
+```
+
+### 9. Start the RQ worker (in a new terminal)
+
+```sh
+source venv/bin/activate  # or safanvenv_wsl/bin/activate
+rq worker microblog-tasks
+```
+
+### 10. Run the application
+
+```sh
+flask run
+```
+
+---
 
 ## Testing
 
@@ -98,10 +174,14 @@ Run the unit tests with:
 python tests.py
 ```
 
+---
+
 ## Search & Translation
 
 - **Search:** Requires a running Elasticsearch instance (e.g., via Docker).
 - **Translation:** Requires a valid Microsoft Translator API key.
+
+---
 
 ## License
 
