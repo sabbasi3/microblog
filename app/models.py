@@ -308,7 +308,7 @@ class Post(SearchableMixin, db.Model):
     __searchable__ = ['body']
 
 class Message(db.Model):
-    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    id: so.Mapped[int] = so.mapped_column(primary_key=True, autoincrement=True)
     sender_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),
                                                  index=True)
     recipient_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),
@@ -343,7 +343,7 @@ class Notification(db.Model):
 
 
 class Task(db.Model):
-    id: so.Mapped[str] = so.mapped_column(sa.String(36), primary_key=True)
+    id: so.Mapped[str] = so.mapped_column(sa.String(36), primary_key=True, autoincrement=True)
     name: so.Mapped[str] = so.mapped_column(sa.String(128), index=True)
     description: so.Mapped[Optional[str]] = so.mapped_column(sa.String(128))
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id))
