@@ -1,6 +1,5 @@
 sendgrid.env 
 .flaskenv
-migrations
 logs
 safanvenv
 __pycache__
