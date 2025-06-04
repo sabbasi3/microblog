@@ -2,7 +2,11 @@
 
 A multilingual, full-featured microblogging web application built with Flask, SQLAlchemy, HTML, JavaScript, and Elasticsearch.
 
-Check it out at: https://blog.safanabbasi.com
+Check it out at: 
+Prod: https://blog.prod.safanabbasi.com
+Prod2: https://blog.safanabbasi.com 
+
+prod2 is hosted on AWS Lightsail andis not running elasticsearch so the search bar will not work
 
 ---
 
@@ -212,12 +216,74 @@ python tests.py
 
 ---
 
-## License
-
-This project is licensed under the MIT License.
-
----
-
 **Note:**  
 - For translation/localization commands, see [`app/cli.py`](app/cli.py).
 - For more details on configuration, see [`config.py`](config.py).
+
+## Technologies Used
+
+**Languages & Frameworks**
+- Python 3
+- Flask (web framework)
+- Jinja2 (templating)
+- JavaScript (frontend interactivity)
+- HTML5, CSS3 (Bootstrap 5 UI)
+
+**Database & ORM**
+- SQLite (development)
+- MySQL (production option)
+- SQLAlchemy (ORM)
+- Flask-SQLAlchemy
+
+**Authentication & Security**
+- Flask-Login (user sessions)
+- Flask-WTF (forms & CSRF protection)
+- Werkzeug (password hashing)
+- Flask-HTTPAuth (API authentication)
+- JWT (password reset tokens)
+
+**Internationalization & Localization**
+- Flask-Babel (translations)
+- Babel (message extraction/compilation)
+- Microsoft Translator API (post translation)
+- Langdetect (language detection)
+
+**Background Tasks & Messaging**
+- Redis (message broker)
+- RQ (background task queue)
+- Flask-Mail (email sending)
+- SendGrid (transactional email)
+
+**Search**
+- Elasticsearch (full-text search)
+- elasticsearch-py (Python client)
+
+**API**
+- REST API (Flask blueprints)
+
+**Testing & Utilities**
+- unittest (Python standard library)
+- Flask-Migrate (database migrations)
+- Alembic (migration engine)
+- python-dotenv (environment variables)
+- requests (HTTP client)
+
+**Deployment & DevOps**
+- Docker (containerization)
+- Gunicorn (production WSGI server)
+- Bash (automation scripts)
+- Nginx (reverse proxy, if used)
+- AWS Lightsail (production hosting)
+- Let's Encrypt (SSL certificates)
+
+**Other**
+- Bootstrap 5 (responsive UI)
+- Gravatar (user avatars)
+- Logging (RotatingFileHandler, SMTPHandler)
+- Git & GitHub (version control)
+
+
+---
+## License
+
+This project is licensed under the MIT License.
